@@ -1,5 +1,6 @@
 package br.com.erudio.domain;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 

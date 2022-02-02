@@ -1,4 +1,4 @@
-/**package br.com.erudio.form;
+package br.com.erudio.api;
 
 public class RoleToUserForm {
     
@@ -45,4 +45,3 @@ public class RoleToUserForm {
         return true;
     }
 }
-*/

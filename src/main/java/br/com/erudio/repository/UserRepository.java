@@ -6,5 +6,5 @@ import br.com.erudio.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     
-    User findByUsername(String username);
+    User findByUserName(String username);
 }

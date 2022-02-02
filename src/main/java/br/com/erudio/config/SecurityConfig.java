@@ -21,14 +21,16 @@ import br.com.erudio.filter.CustomAuthenticationFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
-    private UserDetailsService userDetails;
+    private UserDetailsService userDetailsService;
     
     @Autowired    
-    private PasswordEncoder passwordEncoder;
-    
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetails).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder);
+        super.configure(auth);
     }
 
     @Override
@@ -38,19 +40,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login/**", "/api/user/save", "/api/token/refresh/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/user/save", "/api/token/refresh/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
 
         http.authorizeRequests().anyRequest().authenticated();
-        //http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilter(customAuthenticationFilter);
         //http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
-    
+
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 }

@@ -11,6 +11,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.erudio.domain.Role;
@@ -31,14 +33,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired    
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(userName);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
         if(user == null) {
             logger.error("User not found in the database!");
             throw new UsernameNotFoundException("User not found in the database!");
         } else {
-            logger.info("User found in the database: {}!", userName);
+            logger.info("User found in the database: {}!", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
@@ -52,6 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User saveUser(User user) {
         logger.info("Saving new user {} to the database!", user.getName());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -62,17 +68,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        logger.info("Adding role {} to user {} in the database!", roleName, username);
-        User user = userRepository.findByUserName(username);
-        Role role = roleRepository.findByName(roleName);
+    public void addRoleToUser(String username, String rolename) {
+        logger.info("Adding role {} to user {} in the database!", rolename, username);
+        User user = userRepository.findByUsername(username);
+        Role role = roleRepository.findByName(rolename);
         user.getRoles().add(role);
     }
 
     @Override
     public User getUser(String username) {
         logger.info("Fetching user {}!", username);
-        return userRepository.findByUserName(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override

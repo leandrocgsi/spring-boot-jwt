@@ -18,7 +18,7 @@ public class User {
     private Long id;
     
     private String name;
-    private String userName;
+    private String username;
     private String password;
     
     @ManyToMany(fetch = FetchType.EAGER)
@@ -26,10 +26,10 @@ public class User {
 
     public User() {}
 
-    public User(Long id, String name, String userName, String password, Collection<Role> roles) {
+    public User(Long id, String name, String username, String password, Collection<Role> roles) {
         this.id = id;
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.roles = roles;
     }
@@ -50,12 +50,12 @@ public class User {
         this.name = name;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -82,7 +82,7 @@ public class User {
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((password == null) ? 0 : password.hashCode());
         result = prime * result + ((roles == null) ? 0 : roles.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
 
@@ -104,9 +104,9 @@ public class User {
         if (roles == null) {
             if (other.roles != null) return false;
         } else if (!roles.equals(other.roles)) return false;
-        if (userName == null) {
-            if (other.userName != null) return false;
-        } else if (!userName.equals(other.userName)) return false;
+        if (username == null) {
+            if (other.username != null) return false;
+        } else if (!username.equals(other.username)) return false;
         return true;
     }
 }

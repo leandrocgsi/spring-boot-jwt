@@ -1,32 +1,32 @@
-package br.com.erudio.form;
+/**package br.com.erudio.form;
 
 public class RoleToUserForm {
     
-    private String userName;
-    private String roleName;
+    private String username;
+    private String rolename;
     
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
     
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
-    public String getRoleName() {
-        return roleName;
+    public String getRolename() {
+        return rolename;
     }
     
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
     
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((roleName == null) ? 0 : roleName.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+        result = prime * result + ((rolename == null) ? 0 : rolename.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
     
@@ -36,12 +36,13 @@ public class RoleToUserForm {
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         RoleToUserForm other = (RoleToUserForm) obj;
-        if (roleName == null) {
-            if (other.roleName != null) return false;
-        } else if (!roleName.equals(other.roleName)) return false;
-        if (userName == null) {
-            if (other.userName != null) return false;
-        } else if (!userName.equals(other.userName)) return false;
+        if (rolename == null) {
+            if (other.rolename != null) return false;
+        } else if (!rolename.equals(other.rolename)) return false;
+        if (username == null) {
+            if (other.username != null) return false;
+        } else if (!username.equals(other.username)) return false;
         return true;
     }
 }
+*/

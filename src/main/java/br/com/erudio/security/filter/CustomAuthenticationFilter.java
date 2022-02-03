@@ -1,5 +1,7 @@
 package br.com.erudio.security.filter;
 
+// SEE https://github.com/DanielArturoAlejoAlvarez?tab=repositories
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;

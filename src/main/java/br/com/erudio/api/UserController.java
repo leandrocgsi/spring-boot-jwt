@@ -36,9 +36,9 @@ import br.com.erudio.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-public class UserResource {
+public class UserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String APPLICATION_JSON_VALUE = "application/json";
